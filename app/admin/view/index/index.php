@@ -1,0 +1,1 @@
+{:runhook('system_admin_index')}
