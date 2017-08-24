@@ -22,7 +22,7 @@ use think\Db;
 class Upgrade extends Admin
 {
     public $app_type = 'system';
-    public $app_id = 0;
+    public $identifier = 0;
     public $app_version = '';
     protected function _initialize() {
         parent::_initialize();
@@ -30,10 +30,10 @@ class Upgrade extends Admin
         $this->update_back_path = ROOT_PATH.'backup'.DS.'upback'.DS;
         $this->cloud = new Cloud(config('hs_cloud.identifier'), $this->update_path);
         $this->app_type = input('param.app_type/s', 'system');
-        $this->app_id = input('param.app_id', 0);
-        $this->cache_upgrade_list = 'upgrade_version_list'.$this->app_id;
+        $this->identifier = input('param.identifier', 0);
+        $this->cache_upgrade_list = 'upgrade_version_list'.$this->identifier;
         $map = [];
-        $map['app_id'] = $this->app_id;
+        $map['identifier'] = $this->identifier;
         $map['status'] = ['neq', 0];
         switch ($this->app_type) {
             case 'module':
@@ -104,7 +104,7 @@ class Upgrade extends Admin
             $result = $this->getVersion();
             return json($result);
         }
-        $this->assign('app_id', $this->app_id);
+        $this->assign('identifier', $this->identifier);
         $this->assign('app_type', $this->app_type);
         $this->assign('app_version', $this->app_version);
         return $this->fetch();
@@ -126,11 +126,11 @@ class Upgrade extends Admin
         if (!is_dir($this->update_path)) {
             Dir::create($this->update_path, 0755, true);
         }
-        $lock = $this->update_path.$this->app_id.'upgrade.lock';
+        $lock = $this->update_path.$this->identifier.'upgrade.lock';
         if (!is_file($lock)) {
             file_put_contents($lock, time());
         } else {
-            return $this->error('升级任务执行中，请手动删除此文件后重试！<br>文件地址：/backup/uppack/'.$this->app_id.'upgrade.lock');
+            return $this->error('升级任务执行中，请手动删除此文件后重试！<br>文件地址：/backup/uppack/'.$this->identifier.'upgrade.lock');
         }
 
         $versions = $this->getVersion();
@@ -140,11 +140,11 @@ class Upgrade extends Admin
         foreach ($versions['data'] as $k => $v) {
             if (version_compare($k, $version, '>=')) {
                 if (version_compare($k, $version, '=')) {
-                    $file = $this->cloud->data(['version' => $k, 'app_id' => $this->app_id])->down($this->app_type.'/get/upgrade');
+                    $file = $this->cloud->data(['version' => $k, 'app_identifier' => $this->identifier])->down($this->app_type.'/get/upgrade');
                 }
                 break;
             } else {
-                $file = $this->cloud->data(['version' => $k, 'app_id' => $this->app_id])->down($this->app_type.'/get/upgrade');
+                $file = $this->cloud->data(['version' => $k, 'app_identifier' => $this->identifier])->down($this->app_type.'/get/upgrade');
                 if ($file === false) {
                     $this->clearCache($file);
                     return $this->error('前置版本 '.$k.' 升级失败！');
@@ -314,7 +314,7 @@ class Upgrade extends Admin
      */
     private function _moduleInstall($file, $version)
     {
-        $module = ModuleModel::where('app_id', $this->app_id)->find();
+        $module = ModuleModel::where('identifier', $this->identifier)->find();
         $back_path = $this->update_back_path.'module'.DS.$module->name.DS.$module->version;
         $_version = cache($this->cache_upgrade_list);
         $_version = $_version['data'];
@@ -402,7 +402,7 @@ class Upgrade extends Admin
             }
         }
         // 更新模块版本信息
-        ModuleModel::where('app_id', $this->app_id)->setField('version', $version);
+        ModuleModel::where('identifier', $this->identifier)->setField('version', $version);
         $this->clearCache('', $version);
         return true;
     }
@@ -414,7 +414,7 @@ class Upgrade extends Admin
      */
     private function _pluginsInstall($file, $version)
     {
-        $plugins = PluginsModel::where('app_id', $this->app_id)->find();
+        $plugins = PluginsModel::where('identifier', $this->identifier)->find();
         $back_path = $this->update_back_path.'plugins'.DS.$plugins->name.DS.$plugins->version;
         $_version = cache($this->cache_upgrade_list);
         $_version = $_version['data'];
@@ -500,7 +500,7 @@ class Upgrade extends Admin
             }
         }
         // 更新模块版本信息
-        PluginsModel::where('app_id', $this->app_id)->setField('version', $version);
+        PluginsModel::where('identifier', $this->identifier)->setField('version', $version);
         $this->clearCache('', $version);
         return true;
     }
@@ -517,11 +517,11 @@ class Upgrade extends Admin
             $this->error = '升级失败，请稍后在试！';
             return false;
         }
-        if (!strpos($this->app_id, '.')) {
+        if (!strpos($this->identifier, '.')) {
             $this->error = '升级失败，参数传递错误！';
             return false;
         }
-        $identifier = explode('.', $this->app_id);
+        $identifier = explode('.', $this->identifier);
         $app_name = $identifier[0];
         if (!file_exists('.'.DS.'theme'.DS.$module_name.DS.$app_name.DS.'config.xml')) {
             $this->error = '升级失败，原版本缺少config.xml文件！';
@@ -533,7 +533,7 @@ class Upgrade extends Admin
             $this->error = '升级失败，原版本config.xml配置缺少identifier！';
             return false;
         }
-        if ($config['identifier'] != $this->app_id) {
+        if ($config['identifier'] != $this->identifier) {
             $this->error = '升级失败，异常请求！';
             return false;
         }
@@ -599,7 +599,7 @@ class Upgrade extends Admin
         if (isset($cache['data']) && !empty($cache['data'])) {
             return $cache;
         }
-        $result = $this->cloud->data(['version' => $this->app_version, 'app_id' => $this->app_id])->api($this->app_type.'/get/versions');
+        $result = $this->cloud->data(['version' => $this->app_version, 'app_identifier' => $this->identifier])->api($this->app_type.'/get/versions');
         if ($result['code'] == 1) {
             cache($this->cache_upgrade_list, $result, 3600);  
         }
@@ -614,8 +614,8 @@ class Upgrade extends Admin
      */
     private function clearCache($file = '', $version = '')
     {
-        if (is_file($this->update_path.$this->app_id.'upgrade.lock')) {
-            unlink($this->update_path.$this->app_id.'upgrade.lock');
+        if (is_file($this->update_path.$this->identifier.'upgrade.lock')) {
+            unlink($this->update_path.$this->identifier.'upgrade.lock');
         }
         if (is_file($file)) {
             unlink($file);

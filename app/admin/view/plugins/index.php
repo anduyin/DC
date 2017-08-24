@@ -60,7 +60,7 @@
                                     <a href="{:url('setting?id='.$vo['id'])}" class="layui-btn layui-btn-primary layui-btn-small">配置</a>
                                     <a title="禁用后将无法使用此插件，您确定要禁用吗？" data-href="{:url('status?val=1&id='.$vo['id'])}" class="layui-btn layui-btn-primary layui-btn-small j-ajax">禁用</a>
                                     {if condition="$vo['app_id'] gt 0"}
-                                    <a href="{:url('upgrade/lists?app_type=plugins&app_id='.$vo['app_id'])}" class="layui-btn layui-btn-primary layui-btn-small">更新</a>
+                                    <a href="{:url('upgrade/lists?app_type=plugins&identifier='.$vo['identifier'])}" class="layui-btn layui-btn-primary layui-btn-small">更新</a>
                                     {else /}
                                     <!-- <a data-href="{:url('package?id='.$vo['id'])}" class="layui-btn layui-btn-primary layui-btn-small j-ajax">打包</a> -->
                                     {/if}

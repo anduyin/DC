@@ -66,14 +66,14 @@ layui.use(['jquery', 'layer', 'laytpl'], function() {
         $.ajax({
             type: "POST",
             url: '{:url("download")}',
-            data: 'app_id={$app_id}&app_type={$app_type}&app_version={$app_version}&version='+that.attr('data-version'),
+            data: 'identifier={$identifier}&app_type={$app_type}&app_version={$app_version}&version='+that.attr('data-version'),
             success: function(res) {
                 if (res.code == 1) {
                     layer.msg('升级包获取成功，正在安装 '+that.attr('data-version')+' ...', {time:50000});
                     $.ajax({
                         type: "POST",
                         url: '{:url("install")}',
-                        data: 'app_id={$app_id}&app_type={$app_type}&app_version={$app_version}&file='+res.msg+'&version='+that.attr('data-version'),
+                        data: 'identifier={$identifier}&app_type={$app_type}&app_version={$app_version}&file='+res.msg+'&version='+that.attr('data-version'),
                         success: function(res) {
                             layer.msg(res.msg, {}, function() {
                                 location.href= res.url;
@@ -98,7 +98,7 @@ function getVersion() {
     $.ajax({
         type: "POST",
         url: '{:url("lists")}',
-        data: 'app_id={$app_id}&app_type={$app_type}&app_version={$app_version}',
+        data: 'identifier={$identifier}&app_type={$app_type}&app_version={$app_version}',
         success: function(res) {
             if (res.code == 1) {
                 var getTpl = template.innerHTML;
