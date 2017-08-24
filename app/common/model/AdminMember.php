@@ -121,8 +121,8 @@ class AdminMember extends Model
         $map['email'] = '';
         $map['mobile'] = '';
         $map['username'] = '';
-        $map['last_login_ip'] = '';
-        $map['last_login_time'] = '';
+        $map['last_login_ip'] = get_client_ip();
+        $map['last_login_time'] = request()->time();
         $map['level_id'] = $level_id ? $level_id : 0;
         $res = $this->create($map);
         if (!$res) {
@@ -243,8 +243,8 @@ class AdminMember extends Model
             }
         }
         $map = [];
-        $map['last_login_ip'] = '';
-        $map['last_login_time'] = '';
+        $map['last_login_ip'] = get_client_ip();
+        $map['last_login_time'] = request()->time();
         $this->where('id', $data['id'])->update($map);
         session('login_member', $data);
         session('login_member_sign', $this->dataSign($data));
