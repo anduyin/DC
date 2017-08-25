@@ -64,7 +64,7 @@ $ca = strtolower(request()->controller().'/'.request()->action());
                     <a href="javascript:;"><i class="{$vv['icon']}"></i>{$vv['title']}<span class="layui-nav-more"></span></a>
                     <dl class="layui-nav-child">
                         {if condition="$vv['title'] eq '快捷菜单'"}
-                            <dd><a class="admin-nav-item" href="{:url('index/index')}">后台首页</a></dd>
+                            <dd><a class="admin-nav-item" href="{:url('admin/index/index')}">后台首页</a></dd>
                             {volist name="vv['childs']" id="vvv"}
                             <dd><a class="admin-nav-item" href="{:url($vvv['url'].'?'.$vvv['param'])}">{$vvv['title']}</a><i data-href="{:url('menu/del?ids='.$vvv['id'])}" class="layui-icon j-del-menu">&#xe640;</i></dd>
                             {/volist}

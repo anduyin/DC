@@ -74,11 +74,12 @@
             <textarea rows="8"  class="layui-textarea" name="dir" lay-verify="" autocomplete="off">admin
 home
 model
+lang
 sql
 validate
 view</textarea>
         </div>
-        <div class="layui-form-mid layui-word-aux">在当前模块下生成目录<br>admin(后台控制器)<br>home(前台控制器)<br>model(模型层)<br>sql(数据库文件)<br>vaidate(验证规则)<br>view(视图)<br><span style="color:red">前台模板路径：/theme/模块名/default/，后台静态文件路径：/static/模块名/</span></div>
+        <div class="layui-form-mid layui-word-aux">在当前模块下生成目录<br>admin(后台控制器)<br>home(前台控制器)<br>model(模型层)<br>lang(语言包)<br>sql(数据库文件)<br>vaidate(验证规则)<br>view(视图)<br><span style="color:red">前台模板路径：/theme/模块名/default/，后台静态文件路径：/static/模块名/</span></div>
     </div>
     <div class="layui-form-item">
         <div class="layui-input-block">
