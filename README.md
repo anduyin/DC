@@ -1,7 +1,7 @@
 HisiPHP
 ===============
 
-HisiPHP 基于ThinkPHP5+Layui开发的一套开源PHP快速开发框架，默认集成了权限管理、模块管理、插件管理、钩子管理、数据库管理等常用功能，以方便开发者快速构建自己的应用，我们在发布第一个版本就为您集成了一键升级框架的功能，扩展的模块、插件、模板均可独立在线升级。为了让您开发的应用获得更多的使用者，HisiPHP在发布之初就上线了PHP应用市场([http://store.hisiphp.com](http://store.hisiphp.com))，我们诚邀您的加入。
+HisiPHP 基于ThinkPHP5+layui开发的一套开源PHP快速开发框架，默认集成了权限管理、模块管理、插件管理、钩子管理、数据库管理等常用功能，以方便开发者快速构建自己的应用，我们在发布第一个版本就为您集成了一键升级框架的功能，扩展的模块、插件、模板均可独立在线升级。为了让您开发的应用获得更多的使用者，HisiPHP在发布之初就上线了PHP应用市场([http://store.hisiphp.com](http://store.hisiphp.com?source=oschina))，我们诚邀您的加入。
 
 ## 目录结构
 ```
@@ -43,13 +43,13 @@ www  WEB部署目录（或者子目录）
 [HisiPHP 完全开发手册]https://www.kancloud.cn/hisi/hisiphp
 
 ## 官方网站
-[www.hisiphp.com](http://www.hisiphp.com)
+[www.hisiphp.com](http://www.hisiphp.com?source=oschina)
 
 ## 演示地址
-[demo.hisiphp.com](http://demo.hisiphp.com)
+[demo.hisiphp.com](http://demo.hisiphp.com?source=oschina)
 
 ## QQ交流群
-[50304283](http://shang.qq.com/wpa/qunwpa?idkey=f70e4d4e0ad2ed6ad67a8b467475e695b286d536c7ff850db945542188871fc6)
+[50304283](http://shang.qq.com/wpa/qunwpa?idkey=f70e4d4e0ad2ed6ad67a8b467475e695b286d536c7ff850db945542188871fc6)、[640279557](http://shang.qq.com/wpa/qunwpa?idkey=7f77ff420f91ae529eef4045557d25553f3362f4c076d575a09974396597c88c)
 
 ## 鸣谢
 感谢[ThinkPHP](http://www.thinkphp.cn)、[JQuery](http://jquery.com)、[Layui](http://www.layui.com)等优秀开源项目。
