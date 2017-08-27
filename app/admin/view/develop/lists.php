@@ -4,6 +4,7 @@
     | 列表页实例模板，可直接复制以下代码使用
     +----------------------------------------------------------------------
     -->
+    <form class="page-list-form">
     <div class="layui-collapse page-tips">
       <div class="layui-colla-item">
         <h2 class="layui-colla-title">温馨提示</h2>
@@ -17,7 +18,7 @@
             <a href="" class="layui-btn layui-btn-primary"><i class="aicon ai-tianjia"></i>添加</a>
             <a href="" class="layui-btn layui-btn-primary j-page-btns"><i class="aicon ai-qiyong"></i>启用</a>
             <a href="" class="layui-btn layui-btn-primary j-page-btns"><i class="aicon ai-jinyong1"></i>禁用</a>
-            <a href="" class="layui-btn layui-btn-primary j-page-btns"><i class="aicon ai-jinyong"></i>删除</a>
+            <a href="" class="layui-btn layui-btn-primary j-page-btns confirm"><i class="aicon ai-jinyong"></i>删除</a>
         </div>
         <div class="page-filter fr">
             <form class="layui-form layui-form-pane" action="{:url()}" method="get">
@@ -42,7 +43,7 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th><input type="checkbox" class="layui-checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                    <th><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
                     <th>民族</th>
                     <th>出场时间</th>
                     <th>格言</th>
@@ -52,7 +53,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input type="checkbox" class="layui-checkbox" name="" lay-skin="primary"></td>
+                    <td><input type="checkbox" class="layui-checkbox checkbox-ids" name="ids[]" lay-skin="primary"></td>
                     <td>汉族</td>
                     <td>1989-10-14</td>
                     <td>人生似修行</td>
@@ -73,6 +74,7 @@
             </tbody>
         </table>
     </div>
+    </form>
 </div>
 <div class="layui-tab-item">
     <style type="text/css">
@@ -94,6 +96,7 @@
 | 列表页实例模板，Ctrl+A 可直接复制以下代码使用
 +----------------------------------------------------------------------
 -->
+<form class="page-list-form">
 <div class="layui-collapse page-tips">
   <div class="layui-colla-item">
     <h2 class="layui-colla-title">温馨提示</h2>
@@ -108,7 +111,7 @@
         <a href="{:url('add')}" class="layui-btn layui-btn-primary"><i class="aicon ai-tianjia"></i>添加</a>
         <a href="{:url('status?table=表名(无表前缀)&val=1')}" class="layui-btn layui-btn-primary j-page-btns"><i class="aicon ai-qiyong"></i>启用</a>
         <a href="{:url('status?table=表名(无表前缀)&val=0')}" class="layui-btn layui-btn-primary j-page-btns"><i class="aicon ai-jinyong1"></i>禁用</a>
-        <a href="{:url('del?table=表名(无表前缀)')}" class="layui-btn layui-btn-primary j-page-btns"><i class="aicon ai-jinyong"></i>删除</a>
+        <a href="{:url('del?table=表名(无表前缀)')}" class="layui-btn layui-btn-primary j-page-btns confirm"><i class="aicon ai-jinyong"></i>删除</a>
         {/literal}
     </div>
     <div class="page-filter fr">
@@ -134,7 +137,7 @@
         </colgroup>
         <thead>
             <tr>
-                <th><input type="checkbox" class="layui-checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
+                <th><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
                 <th>民族</th>
                 <th>出场时间</th>
                 <th>格言</th>
@@ -146,12 +149,12 @@
             {literal}
             {volist name="data_list" id="vo"}
             <tr>
-                <td><input type="checkbox" name="ids[]" class="layui-checkbox checkbox-ids" value="{$vo['id']}" lay-skin="primary"></td>
+                <td><input type="checkbox" class="layui-checkbox checkbox-ids" name="ids[]" value="{$vo['id']}" lay-skin="primary"></td>
                 <td>汉族</td>
                 <td>1989-10-14</td>
                 <td>人生似修行</td>
                 <td>
-                    <input type="checkbox" checked name="open" lay-skin="switch" lay-filter="switchTest" lay-text="正常|关闭">
+                    <input type="checkbox" name="status" {if condition="$vo['status'] eq 1"}checked=""{/if} value="{$vo['status']}" lay-skin="switch" lay-filter="switchStatus" lay-text="正常|关闭" data-href="{:url('status?table=表名(无表前缀)&ids='.$vo['id'])}">
                 </td>
                 <td>
                     <div class="layui-btn-group">
@@ -168,5 +171,6 @@
         </tbody>
     </table>
 </div>
+</form>
     </textarea>
 </div>
