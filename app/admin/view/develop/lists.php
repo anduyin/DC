@@ -38,6 +38,7 @@
                 <col width="150">
                 <col width="200">
                 <col width="300">
+                <col width="100">
                 <col width="80">
                 <col>
             </colgroup>
@@ -47,6 +48,7 @@
                     <th>民族</th>
                     <th>出场时间</th>
                     <th>格言</th>
+                    <th>排序</th>
                     <th>状态</th>
                     <th>操作</th>
                 </tr> 
@@ -58,7 +60,11 @@
                     <td>1989-10-14</td>
                     <td>人生似修行</td>
                     <td>
-                        <input type="checkbox" checked name="open" lay-skin="switch" lay-filter="switchTest" lay-text="正常|关闭">
+                        <input type="text" class="layui-input j-ajax-input input-sort" onkeyup="value=value.replace(/[^\d]/g,'')" 
+value="100" data-value="" data-href="">
+                    </td>
+                    <td>
+                        <input type="checkbox" name="status" checked="" value="0" lay-skin="switch" lay-filter="switchStatus" lay-text="正常|关闭" data-href="">
                     </td>
                     <td>
                         <div class="layui-btn-group">
@@ -132,6 +138,7 @@
             <col width="150">
             <col width="200">
             <col width="300">
+            <col width="100">
             <col width="80">
             <col>
         </colgroup>
@@ -141,6 +148,7 @@
                 <th>民族</th>
                 <th>出场时间</th>
                 <th>格言</th>
+                <th>排序</th>
                 <th>状态</th>
                 <th>操作</th>
             </tr> 
@@ -153,6 +161,10 @@
                 <td>汉族</td>
                 <td>1989-10-14</td>
                 <td>人生似修行</td>
+                <td>
+                    <input type="text" class="layui-input j-ajax-input input-sort" onkeyup="value=value.replace(/[^\d]/g,'')" 
+value="{$vo['sort']}" data-value="{$vo['sort']}" data-href="{:url('sort?table=test_table&ids='.$vo['id'])}">
+                </td>
                 <td>
                     <input type="checkbox" name="status" {if condition="$vo['status'] eq 1"}checked=""{/if} value="{$vo['status']}" lay-skin="switch" lay-filter="switchStatus" lay-text="正常|关闭" data-href="{:url('status?table=表名(无表前缀)&ids='.$vo['id'])}">
                 </td>
