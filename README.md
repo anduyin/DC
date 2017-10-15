@@ -46,7 +46,7 @@ www  WEB部署目录（或者子目录）
 [www.hisiphp.com](http://www.hisiphp.com?source=oschina)
 
 ## 演示地址
-[demo.hisiphp.com](http://demo.hisiphp.com?source=oschina)
+[demo.hisiphp.com](http://demo.hisiphp.com/admin.php?source=oschina)
 
 ## QQ交流群
 [50304283](http://shang.qq.com/wpa/qunwpa?idkey=f70e4d4e0ad2ed6ad67a8b467475e695b286d536c7ff850db945542188871fc6)、[640279557](http://shang.qq.com/wpa/qunwpa?idkey=7f77ff420f91ae529eef4045557d25553f3362f4c076d575a09974396597c88c)
