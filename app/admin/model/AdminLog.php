@@ -25,8 +25,8 @@ class AdminLog extends Model
     // 自动写入时间戳
     protected $autoWriteTimestamp = true;
     
-    public function user()
+    public function username()
     {
-        return $this->hasOne('AdminUser', 'id', 'uid');
+        return $this->belongsTo('AdminUser', 'uid', 'id')->field('nick');
     }
 }

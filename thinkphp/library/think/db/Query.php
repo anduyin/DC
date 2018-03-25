@@ -58,9 +58,9 @@ class Query
      * 构造函数
      * @access public
      * @param Connection $connection 数据库对象实例
-     * @param Model      $model      模型对象
+     * @param string     $model      模型名
      */
-    public function __construct(Connection $connection = null, $model = null)
+    public function __construct(Connection $connection = null, $model = '')
     {
         $this->connection = $connection ?: Db::connect([], true);
         $this->prefix     = $this->connection->getConfig('prefix');
@@ -133,7 +133,7 @@ class Query
     /**
      * 获取当前的模型对象名
      * @access public
-     * @return Model|null
+     * @return string
      */
     public function getModel()
     {
@@ -707,7 +707,8 @@ class Query
     {
         // 传入的表名为数组
         if (is_array($join)) {
-            $table = $join;
+            $table = key($join);
+            $alias = current($join);
         } else {
             $join = trim($join);
             if (false !== strpos($join, '(')) {
@@ -728,9 +729,16 @@ class Query
                     $table = $this->getTable($table);
                 }
             }
-            if (isset($alias) && $table != $alias) {
-                $table = [$table => $alias];
+        }
+        if (isset($alias) && $table != $alias) {
+            if (isset($this->options['alias'][$table])) {
+                $table = $table . '@think' . uniqid();
+            } elseif ($this->gettable() == $table) {
+                $table = $table . '@think' . uniqid();
             }
+
+            $table = [$table => $alias];
+            $this->alias($table);
         }
         return $table;
     }
@@ -1902,10 +1910,11 @@ class Query
             $with = explode(',', $with);
         }
 
-        $first = true;
+        $first        = true;
+        $currentModel = $this->model;
 
         /** @var Model $class */
-        $class = $this->model;
+        $class = new $currentModel;
         foreach ($with as $key => $relation) {
             $subRelation = '';
             $closure     = false;
@@ -1964,7 +1973,7 @@ class Query
                     $relation = $key;
                 }
                 $relation = Loader::parseName($relation, 1, false);
-                $count    = '(' . $this->model->$relation()->getRelationCountQuery($closure) . ')';
+                $count    = '(' . (new $this->model)->$relation()->getRelationCountQuery($closure) . ')';
                 $this->field([$count => Loader::parseName($relation) . '_count']);
             }
         }
@@ -2356,10 +2365,11 @@ class Query
         // 数据列表读取后的处理
         if (!empty($this->model)) {
             // 生成模型对象
+            $modelName = $this->model;
             if (count($resultSet) > 0) {
                 foreach ($resultSet as $key => $result) {
                     /** @var Model $model */
-                    $model = $this->model->newInstance($result);
+                    $model = new $modelName($result);
                     $model->isUpdate(true);
 
                     // 关联查询
@@ -2379,7 +2389,7 @@ class Query
                 // 模型数据集转换
                 $resultSet = $model->toCollection($resultSet);
             } else {
-                $resultSet = $this->model->toCollection($resultSet);
+                $resultSet = (new $modelName)->toCollection($resultSet);
             }
         } elseif ('collection' == $this->connection->getConfig('resultset_type')) {
             // 返回Collection对象
@@ -2505,7 +2515,7 @@ class Query
                 $result = isset($resultSet[0]) ? $resultSet[0] : null;
             }
 
-            if (isset($cache) && $result) {
+            if (isset($cache) && false !== $result) {
                 // 缓存数据
                 $this->cacheData($key, $result, $cache);
             }
@@ -2515,7 +2525,8 @@ class Query
         if (!empty($result)) {
             if (!empty($this->model)) {
                 // 返回模型对象
-                $result = $this->model->newInstance($result);
+                $model  = $this->model;
+                $result = new $model($result);
                 $result->isUpdate(true, isset($options['where']['AND']) ? $options['where']['AND'] : null);
                 // 关联查询
                 if (!empty($options['relation'])) {
@@ -2546,8 +2557,7 @@ class Query
     protected function throwNotFound($options = [])
     {
         if (!empty($this->model)) {
-            $class = get_class($this->model);
-            throw new ModelNotFoundException('model data Not Found:' . $class, $class, $options);
+            throw new ModelNotFoundException('model data Not Found:' . $this->model, $this->model, $options);
         } else {
             $table = is_array($options['table']) ? key($options['table']) : $options['table'];
             throw new DataNotFoundException('table data not Found:' . $table, $table, $options);
@@ -2595,9 +2605,7 @@ class Query
     public function chunk($count, $callback, $column = null, $order = 'asc')
     {
         $options = $this->getOptions();
-        if (empty($options['table'])) {
-            $options['table'] = $this->getTable();
-        }
+
         $column = $column ?: $this->getPk($options);
 
         if (isset($options['order'])) {
@@ -2620,7 +2628,7 @@ class Query
         }
         $resultSet = $query->order($column, $order)->select();
 
-        while (count($resultSet) > 0) {
+        while (!empty($resultSet)) {
             if ($resultSet instanceof Collection) {
                 $resultSet = $resultSet->all();
             }
@@ -2641,8 +2649,8 @@ class Query
             }
 
             $resultSet = $query->bind($bind)->order($column, $order)->select();
-        }
 
+        }
         return true;
     }
 

@@ -102,7 +102,7 @@ class User extends Admin
             if($result !== true) {
                 return $this->error($result);
             }
-            unset($data['id'], $data['password_confirm']);
+            unset($data['id']);
             $data['last_login_ip'] = '';
             $data['auth'] = '';
             if (!UserModel::create($data)) {
@@ -160,7 +160,7 @@ class User extends Admin
             }
 
             if ($data['password'] == '') {
-                unset($data['password'], $data['password_confirm']);
+                unset($data['password']);
             }
 
             if (!UserModel::update($data)) {

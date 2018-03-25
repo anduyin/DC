@@ -9,8 +9,10 @@
 // | Author: 橘子俊 <364666827@qq.com>，开发者QQ群：50304283
 // +----------------------------------------------------------------------
 namespace app\common\controller;
+
 use think\View;
 use think\Controller;
+
 /**
  * 项目公共控制器
  * @package app\common\controller
@@ -19,7 +21,6 @@ class Common extends Controller
 {
     protected function _initialize()
     {
-        
     }
 
     /**
@@ -31,15 +32,15 @@ class Common extends Controller
      */
     protected function afetch($template = '') {
         if ($template) {
-            return parent::fetch($template);
+            return $this->fetch($template);
         }
         $dispatch = request()->dispatch();
         if (!$dispatch['module'][2]) {
             $dispatch['module'][2] = 'index';
         }
-        return parent::fetch($dispatch['module'][1].DS.$dispatch['module'][2]);
+        return $this->fetch($dispatch['module'][1].DS.$dispatch['module'][2]);
     }
-
+    
     /**
      * 渲染插件模板
      * @param string $template 模板名称
