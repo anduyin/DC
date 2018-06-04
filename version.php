@@ -11,8 +11,8 @@
 return [
     'hisiphp' => [
         'name' => 'HisiPHP',
-        'version' => '1.0.4',
-        'release' => 20180412,
+        'version' => '1.0.5',
+        'release' => 20180604,
         'copyright' => 'HisiPHP.COM',
         'url' => 'http://www.hisiphp.com?v=thinkphp5',
     ],
