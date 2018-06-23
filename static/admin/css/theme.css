@@ -1,0 +1,46 @@
+/* 系统主题方案 */
+/*blue*/
+.blue .header-logo{color:#fff;}
+.blue .layui-header{z-index:900;background-color:#20a0ff!important;}
+.blue .layui-side{z-index:900;background-color:#eef1f5!important;}
+.blue .layui-header .layui-nav .layui-this:after,.blue .layui-header .layui-nav-bar{background-color:#ffffff;}
+.blue .layui-nav-tree .layui-nav-item a{background-color:#eff2f6!important;color:#48576a!important;}
+.blue .layui-nav-tree .layui-nav-child a{background-color:#e5e9f2!important;color:#48576a!important;text-indent:10px;}
+.blue .layui-nav-tree .layui-nav-child a:hover{background-color:#d1dbe5!important;}
+.blue .layui-side i.aicon{color:#48566a;}
+.blue .layui-side .layui-nav-more{border-color:#48566a transparent transparent}
+.blue .layui-nav-itemed .layui-nav-more{border-color:transparent transparent #48566a}
+.blue .layui-form-onswitch,
+.blue .layui-form-checked[lay-skin=primary] i{border-color:#20a0ff;background-color:#20a0ff;}
+.blue .layui-form-label{color:#666!important;}
+.blue .layui-side .layui-this a,
+.blue .layui-side .layui-this i.aicon{color:#20a0ff!important;}
+.blue .layui-tab-card .layui-tab-title{background-color:#f9f9f9!important;}
+.blue .layui-nav-tree .layui-nav-bar{background-color:#20a0ff!important}
+.blue .layui-btn{background-color:#20a0ff;}
+.blue .layui-btn-primary{background-color:#ffffff;}
+.blue .layui-btn-primary:hover{border-color:#20a0ff;color:#20a0ff;}
+.blue .layui-form-radio i:hover,.red  .layui-form-radioed i{color:#20a0ff;}
+
+/* red */
+.red .header-logo{color:#fff;}
+.red .layui-header{z-index:900;background-color:#F78400!important;}
+.red .layui-side{z-index:900;background-color:#eef1f5!important;}
+.red .layui-header .layui-nav .layui-this:after,.red .layui-header .layui-nav-bar{background-color:#ffffff;}
+.red .layui-nav-tree .layui-nav-item a{background-color:#eff2f6!important;color:#48576a!important;}
+.red .layui-nav-tree .layui-nav-child a{background-color:#e5e9f2!important;color:#48576a!important;text-indent:10px;}
+.red .layui-nav-tree .layui-nav-child a:hover{background-color:#d1dbe5!important;}
+.red .layui-side i.aicon{color:#48566a;}
+.red .layui-side .layui-nav-more{border-color:#48566a transparent transparent}
+.red .layui-nav-itemed .layui-nav-more{border-color:transparent transparent #48566a}
+.red .layui-form-onswitch,
+.red .layui-form-checked[lay-skin=primary] i{border-color:#F78400;background-color:#F78400;}
+.red .layui-form-label{color:#666!important;}
+.red .layui-side .layui-this a,
+.red .layui-side .layui-this i.aicon{color:#F78400!important;}
+.red .layui-tab-card .layui-tab-title{background-color:#f9f9f9!important;}
+.red .layui-nav-tree .layui-nav-bar{background-color:#F78400!important}
+.red .layui-btn{background-color:#F78400;}
+.red .layui-btn-primary{background-color:#ffffff;}
+.red .layui-btn-primary:hover{border-color:#F78400;color:#F78400;}
+.red .layui-form-radio i:hover,.red  .layui-form-radioed i{color:#F78400;}
