@@ -1,0 +1,8 @@
+---------------------------------------------------------------
+[ 2018-12-12T13:55:41+08:00 ] 127.0.0.1 GET localhost/hisiphp/admin.php/admin/member/del.html?id=1000000
+[运行时间：0.247013s] [吞吐率：4.05req/s] [内存消耗：2,665.45kb] [文件加载：72]
+[ error ] [10501]SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hisi.hisi_' doesn't exist[E:\PHPstudy\PHPTutorial\WWW\hisiphp\thinkphp\library\think\db\Connection.php:390]
+---------------------------------------------------------------
+[ 2018-12-12T13:55:46+08:00 ] 127.0.0.1 GET localhost/hisiphp/admin.php/admin/member/del.html?id=1000000
+[运行时间：0.209011s] [吞吐率：4.78req/s] [内存消耗：2,665.95kb] [文件加载：72]
+[ error ] [10501]SQLSTATE[42S02]: Base table or view not found: 1146 Table 'hisi.hisi_' doesn't exist[E:\PHPstudy\PHPTutorial\WWW\hisiphp\thinkphp\library\think\db\Connection.php:390]

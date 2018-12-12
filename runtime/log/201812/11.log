@@ -1,0 +1,4 @@
+---------------------------------------------------------------
+[ 2018-12-11T22:48:29+08:00 ] 127.0.0.1 GET localhost/hisiphp/admin.php/caiwu/caiwu/index.html
+[运行时间：0.208012s] [吞吐率：4.81req/s] [内存消耗：2,816.46kb] [文件加载：75]
+[ error ] [0]模板文件不存在:E:\PHPstudy\PHPTutorial\WWW\hisiphp/app/caiwu\view\caiwu\index.php[E:\PHPstudy\PHPTutorial\WWW\hisiphp\thinkphp\library\think\view\driver\Think.php:82]
